@@ -1,0 +1,16 @@
+<div ng-controller="navbarCtrl as $navbarCtrl">
+    <div layout="row" layout-fill>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <span class="glyphicon glyphicon-star text-default"></span>
+                <h2 md-truncate flex><strong>Stacktrack</strong></h2>
+                <md-button ng-click="$navbarCtrl.switchToPaste()">
+                    Tracking
+                </md-button>
+                <md-button ng-click="$navbarCtrl.switchToActivity()">
+                    Activity
+                </md-button>
+            </div>
+      </md-toolbar>
+    </div>
+</div>

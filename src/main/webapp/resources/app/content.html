@@ -1,0 +1,24 @@
+<div ng-include="'resources/app/navbar.html'"></div>
+<div ng-controller="contentCtrl as $contentCtrl">
+	<div class="panel panel-primary" ng-init="$contentCtrl.getContent()">
+		<div class="panel-heading">
+			<span class="panel-title text-default">
+	        	<span ng-bind="$contentCtrl.contentData.title"></span>
+	        	<span class="pull-right"><i ng-bind="$contentCtrl.metadata()"></i></span>
+			</span>
+		</div>
+		<div class="panel-body">
+			<div class="container-fluid">
+				<div>
+					<textarea readonly class="form-control noresize" name="content" rows="22" ng-bind="$contentCtrl.contentData.content"></textarea>
+				</div>
+			</div>			
+		</div>
+	</div>
+	<div layout="row" style="margin-top: -15px;">
+		<span flex></span>
+	  	<md-button class="md-primary md-raised" ng-click="$contentCtrl.goToRaw()">
+	   	Raw
+	 	</md-button>
+	</div>
+</div>

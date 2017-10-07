@@ -1,0 +1,30 @@
+textarea.noresize {
+	resize: none;
+}
+
+.break-all-words {
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+md-card.full-size {
+	height: 100%;
+	width: 100%;
+}
+
+.md-button.md-lime-theme.dark-lime {
+	background-color: #D4E157;
+}
+
+div.panel.panel-primary {
+	border-radius: 0;
+}
+
+div.panel-heading {
+	border-radius: 0;
+}
+
+input.has-error { 
+    color: red;
+    border: 1px red solid;
+}

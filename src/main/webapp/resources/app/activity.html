@@ -1,0 +1,60 @@
+<div ng-include="'resources/app/navbar.html'"></div>
+<div class="panel panel-primary" ng-controller="activityCtrl as $activityCtrl">
+	<div class="panel-heading row">
+		<div class="col-md-6"><span class="panel-title text-default" ng-bind="$activityCtrl.searchedText"></span></div>
+		<div class="col-md-6"><span class="panel-title text-default">Latest: </span></div>
+	</div>
+	<div class="panel-body">
+		<div class="container-fluid">
+			<div class="col-md-6">
+				<form name="search" class="input-group" style="padding-right: 20px; margin-bottom: 30px;">
+					<label class="input-group-addon btn btn-primary glyphicon glyphicon-search" style="top: 0px;" ng-click="$activityCtrl.search()" >
+					</label>
+					<input tooltip-placement="right" tooltip-trigger="'none'" uib-tooltip="At least 3 characters needed." tooltip-is-open="search.title.$invalid || search.author.$invalid" type="text" name="title" id="title" class="form-control" placeholder="Title..." ng-model="$activityCtrl.searchTitle" ng-minlength="3" ng-class="{'has-error': search.title.$invalid && search.title.$touched}" />
+					<input type="text" name="author" id="author" class="form-control" placeholder="Author..." ng-model="$activityCtrl.searchAuthor" ng-minlength="3" ng-class="{'has-error': search.author.$invalid && search.author.$touched}" style="border-radius: 0px;" />
+				</form>
+				<div style="padding-right: 20px; margin-left: -15px;" layout="column" flex>
+					<div ng-repeat="paste in $activityCtrl.searched" layout="column" flex>
+						<md-card md-theme="lime" md-theme-watch class="full-size">
+					        <md-card-title>
+					          <md-card-title-text>
+					            <span class="md-headline" ng-bind="paste.title"></span>
+					            <span class="md-subhead" ng-bind="'posted by ' + paste.author + ' on ' + paste.createDate"></span>
+					          </md-card-title-text>
+					          <span class="glyphicon glyphicon-pushpin" layout-align="end center"></span>
+					        </md-card-title>
+					        <md-card-content ng-bind="paste.shortContent" class="break-all-words"></md-card-content>
+					        <md-card-actions layout="row" layout-align="end center">
+					          <md-button ng-click="$activityCtrl.goToContent(paste.uuid)" class="dark-lime">View</md-button>
+					          <md-button ng-click="$activityCtrl.goToRaw(paste.uuid)" class="dark-lime">Raw</md-button>
+					        </md-card-actions>
+				      	</md-card>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6" style="padding-left: 20px; border-left: solid; border-color: blue; border-width: 1px;">
+				<div ng-init="$activityCtrl.getLatest()" layout="column" flex>
+					<div ng-repeat="paste in $activityCtrl.latest" layout="column" flex>
+						<md-card md-theme="lime" md-theme-watch class="full-size">
+					        <md-card-title>
+					          <md-card-title-text>
+					            <span class="md-headline" ng-bind="paste.title"></span>
+					            <span class="md-subhead" ng-bind="'posted by ' + paste.author + ', ' + $activityCtrl.calculateTimeAgo(paste.createDate)"></span>
+					          </md-card-title-text>
+					          <span class="glyphicon glyphicon-pushpin" layout-align="end center"></span>
+					        </md-card-title>
+					        <md-card-content ng-bind="paste.shortContent" class="break-all-words"></md-card-content>
+					        <md-card-actions layout="row" layout-align="end center">
+					          <md-button ng-click="$activityCtrl.goToContent(paste.uuid)" class="dark-lime">View</md-button>
+					          <md-button ng-click="$activityCtrl.goToRaw(paste.uuid)" class="dark-lime">Raw</md-button>
+					        </md-card-actions>
+				      	</md-card>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div>
+
+	<div uib-alert ng-if="$activityCtrl.alert.enabled" style="position: fixed; bottom: 0; right: 0" ng-class="'alert-' + $activityCtrl.alert.type" close="$activityCtrl.closeAlert()" dismiss-on-timeout="5000" ng-bind="$activityCtrl.alert.msg"></div>
+
+</div>

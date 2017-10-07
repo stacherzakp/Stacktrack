@@ -1,0 +1,75 @@
+<div ng-include="'resources/app/navbar.html'"></div>
+<div class="panel panel-primary" ng-controller="pasteCtrl as $pasteCtrl">
+	<div class="panel-heading">
+		<span class="panel-title">
+        	<span class="text-default">Track your paste: </span>
+		</span>
+	</div>
+	<div class="panel-body">
+		<div class="container-fluid">
+			<div class="col-md-9">
+				<div class="input-group">
+					<span class="input-group-addon"><label for="title">Title: </label></span>
+					<input type="text" name="title" id="title" class="form-control" ng-model="$pasteCtrl.pasteModel.title" placeholder="Untitled" />
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="input-group">
+					<div id="privacy" class="btn-group">
+				        <label class="btn btn-primary" ng-model="$pasteCtrl.pasteModel.privacy" uib-btn-radio="'PUBLIC'">Public</label>
+				        <label class="btn btn-primary" ng-model="$pasteCtrl.pasteModel.privacy" uib-btn-radio="'PRIVATE'">Private</label>
+				    </div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="input-group">
+					<span class="input-group-addon"><label for="author">Author: </label></span>	
+					<input type="text" name="author" id="author" class="form-control" ng-model="$pasteCtrl.pasteModel.author" placeholder="Anonymous" />
+				</div>
+			</div>
+			<div ng-show="$pasteCtrl.isPrivatePaste()" class="col-md-3">
+				<div class="input-group">
+					<span class="input-group-addon"><label for="password">Password: </label></span>	
+					<input type="password" name="password" id="password" class="form-control" ng-model="$pasteCtrl.pasteModel.password" />
+				</div>
+			</div>
+			<div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px; border-bottom: solid; border-color: blue; border-width: 1px;"></div>
+			<div class="col-md-9">
+				<form class="form-group" ng-submit="$pasteCtrl.create()" role="form">
+		      		<textarea class="form-control noresize" name="content" rows="15" placeholder="Paste your content..." ng-model="$pasteCtrl.pasteModel.content"></textarea>
+					<br>
+					<div class="form-actions">
+		       			<button type="submit" class="btn btn-primary" ng-disabled="!$pasteCtrl.pasteModel.content">Submit paste</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-3">
+				<form class="form-group" role="form">
+					<label for="file-selector">... or upload content via file</label>
+					<div class="input-group">
+						<label tooltip-placement="left" tooltip-trigger="'none'" uib-tooltip="{{$pasteCtrl.invalidFileMessage()}}" tooltip-is-open="$pasteCtrl.invalidFile.$error" class="btn btn-primary input-group-addon" for="file-selector">
+							<input id="file-selector" class="file" type="file" ngf-select ngf-pattern="'.txt,.xml'" ngf-max-size="5MB" ng-model="$pasteCtrl.file" ngf-model-invalid="$pasteCtrl.invalidFile" style="display: none;">
+							Browse
+						</label>
+						<input id="fileNameField" type="text" class="form-control" readonly="" ng-value="$pasteCtrl.file['name']">
+					</div>
+				</form>
+			</div>
+			<div class="col-md-3">
+				<form class="form-group" role="form">
+					<div class="form-actions">
+	       				<button type="submit" class="btn btn-primary" ng-disabled="!$pasteCtrl.file" ng-click="$pasteCtrl.submitFile()">Submit from file</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-3">
+				<uib-progressbar max="100" value="$pasteCtrl.uploadProgress">
+          			<span style="color:white; white-space:nowrap;">{{$pasteCtrl.uploadProgress}} %</span>
+      			</uib-progressbar>
+			</div>
+		</div>
+	
+	</div>
+
+	<div uib-alert ng-if="$pasteCtrl.savingError" style="position: fixed; bottom: 0; right: 0" class="alert-danger" close="$pasteCtrl.closeAlert()" dismiss-on-timeout="5000">Problem with creating a paste with requested data.</div>
+</div>
