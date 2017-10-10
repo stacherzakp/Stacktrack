@@ -1,9 +1,15 @@
-# stacktrack
-Stacktrack - pastebin alternative for local usage
-
+# Stacktrack
+Pastebin alternative for local usage.
 
 Web application as an alternative for pastebin, allows to serve a text content via unique URL. 
 Can be deployed in internal network as an internal tool. 
+
+### Functionalities
+- creating content from text input or file (up to 5mb)
+- serving content via unique urls
+- searching by title/author
+- last 10 pastes
+- securing paste by password (optional)
 
 ## Preview
 
