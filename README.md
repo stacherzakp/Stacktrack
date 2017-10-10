@@ -28,7 +28,7 @@ Can be deployed in internal network as an internal tool.
 ````
 -Dstacktrack-database=path_to_properties_file
  
-example: `export CATALINA_OPTS="$CATALINA_OPTS -Dstacktrack-database=/usr/share/tomcat8/conf/stacktrack-database.properties
+example: export CATALINA_OPTS="$CATALINA_OPTS -Dstacktrack-database=/usr/share/tomcat8/conf/stacktrack-database.properties
 ````
 
 4. Create properties file with your database credentials:
